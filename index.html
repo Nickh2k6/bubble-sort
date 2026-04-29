@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>即時日期與時間</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 60px 80px;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .date {
+            font-size: 2em;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .time {
+            font-size: 5em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .seconds {
+            font-size: 0.6em;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 50px;
+            }
+            .date {
+                font-size: 1.5em;
+            }
+            .time {
+                font-size: 3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="date" id="date"></div>
+        <div class="time" id="time"></div>
+    </div>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            const weekday = weekdays[now.getDay()];
+            
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('date').textContent = `${year}年${month}月${day}日 ${weekday}`;
+            document.getElementById('time').innerHTML = `${hours}:${minutes}<span class="seconds">:${seconds}</span>`;
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+</body>
+</html>
